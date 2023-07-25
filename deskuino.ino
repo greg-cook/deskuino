@@ -4,17 +4,17 @@ https://wiki.seeedstudio.com/Seeeduino-XIAO/
 */
 
 // Pins attached to the motor controller
-const int IN1_PIN = 9;
-const int IN2_PIN = 10;
-const int PWM_PIN = 8;
+const int DESKSPEED_PIN = 8;
+const int DESKUP_PIN = 10;
+const int DESKDOWN_PIN = 9;
 
 // Set upper and lower bound for movement speed
 const int MINPWM = 128;
 const int MAXPWM = 255;
 
-// The pin number attached to the button.
-const int UPBUTTON_PIN = 5;
-const int DOWNBUTTON_PIN = 6;
+// The pins for the buttons
+const int UPBUTTON_PIN = 6;
+const int DOWNBUTTON_PIN = 5;
 
 int buttonPressed = 0;
 
@@ -33,9 +33,9 @@ void setup() {
 
   // Initialize the motor controller
   Serial.println(F("setup(): initializing outputs"));
-  pinMode(IN1_PIN, OUTPUT);
-  pinMode(IN2_PIN, OUTPUT);
-  pinMode(PWM_PIN, OUTPUT);
+  pinMode(DESKUP_PIN, OUTPUT);
+  pinMode(DESKDOWN_PIN, OUTPUT);
+  pinMode(DESKSPEED_PIN, OUTPUT);
 
   Serial.println(F("setup(): ensuring desk is stopped"));
   deskStop();
@@ -67,20 +67,18 @@ void checkDownButton() {
 }
 
 void deskUp(int Speed) {
-  digitalWrite(IN1_PIN, HIGH);
-  digitalWrite(IN2_PIN, LOW);
-  analogWrite(PWM_PIN, Speed);
+  digitalWrite(DESKUP_PIN, HIGH);
+  digitalWrite(DESKDOWN_PIN, LOW);
+  analogWrite(DESKSPEED_PIN, Speed);
 }
 
 void deskDown(int Speed) {
-  digitalWrite(IN1_PIN, LOW);
-  digitalWrite(IN2_PIN, HIGH);
-  analogWrite(PWM_PIN, Speed);
+  digitalWrite(DESKUP_PIN, LOW);
+  digitalWrite(DESKDOWN_PIN, HIGH);
+  analogWrite(DESKSPEED_PIN, Speed);
 }
 
 void deskStop() {
-  digitalWrite(IN1_PIN, LOW);
-  digitalWrite(IN2_PIN, LOW);
+  digitalWrite(DESKUP_PIN, LOW);
+  digitalWrite(DESKDOWN_PIN, LOW);
 }
-
-
