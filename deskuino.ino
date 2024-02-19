@@ -3,6 +3,9 @@ Desk controller using Seeed Xiao
 https://wiki.seeedstudio.com/Seeeduino-XIAO/
 */
 
+#include <Arduino.h>
+#include <OneButton.h> 
+
 // Pins attached to the motor controller
 const int DESKSPEED_PIN = 8;
 const int DESKUP_PIN = 10;
@@ -51,6 +54,7 @@ void loop() {
 void checkUpButton() {
   buttonPressed = digitalRead(UPBUTTON_PIN);
   if (buttonPressed == HIGH) {
+    // Serial.println(F("loop(): up pressed"));
     deskUp(MAXPWM);
   } else {
     deskStop();
@@ -60,6 +64,7 @@ void checkUpButton() {
 void checkDownButton() {
   buttonPressed = digitalRead(DOWNBUTTON_PIN);
   if (buttonPressed == HIGH) {
+    // Serial.println(F("loop(): down pressed"));
     deskDown(MAXPWM);
   } else {
     deskStop();
